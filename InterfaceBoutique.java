@@ -1,5 +1,5 @@
 import java.rmi.Remote;
-import java.util.ArrayList;
+
 
 
 public interface InterfaceBoutique extends Remote {
@@ -8,5 +8,8 @@ public interface InterfaceBoutique extends Remote {
     void addMember(String nombre, String cedula, int type) throws java.rmi.RemoteException;
     boolean existeMiembro(String c) throws java.rmi.RemoteException;
     boolean existeCliente(String c) throws java.rmi.RemoteException;
+    Garment searchGarment(int id)throws java.rmi.RemoteException;
+    void editGarment(int unidades, String nombre, int precio,int id) throws java.rmi.RemoteException; 
+    void deleteGarment(int id)  throws java.rmi.RemoteException; 
     
 }

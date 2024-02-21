@@ -5,9 +5,7 @@ import java.nio.charset.MalformedInputException;
 import java.rmi.*;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
-import java.rmi.server.*;
 
-import javax.print.attribute.standard.MediaSize.NA;
 
 
 public class ServerBoutique {

@@ -1,4 +1,6 @@
-public class Garment {
+import java.io.Serializable;
+
+public class Garment implements Serializable{
     private int unidades;
     private String nombre;
     private int precio;
