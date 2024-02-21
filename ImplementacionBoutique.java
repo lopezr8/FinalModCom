@@ -18,7 +18,11 @@ public class ImplementacionBoutique extends UnicastRemoteObject implements Inter
         garments.add(garment);
     }
 
-    public void editGarment(){
+    public void editGarment(int id){
+        
+    }
+
+    public void deleteGarment(int id){
 
     }
 
