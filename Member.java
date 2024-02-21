@@ -1,12 +1,10 @@
-import java.util.ArrayList;
 
 public class Member {
     private String nombre;
     private String cedula;
     private int type;
-    private ArrayList<Garment> garments = new ArrayList<Garment>();
 
-    
+
 
     public Member(String nombre, String cedula, int type) {
         this.nombre = nombre;

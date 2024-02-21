@@ -1,8 +1,7 @@
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.rmi.Naming;
-import java.rmi.RemoteException;
-import java.util.Scanner;
+
 
 public class ClientBoutique {
     public static void main(String[] args) {
@@ -235,9 +234,7 @@ public class ClientBoutique {
             while (!salir) {
                 System.out.println("Menú Cliente:");
                 System.out.println("1. Comprar Ropa");
-                System.out.println("2. Listar Stock de la Boutique");
-                System.out.println("3. Reporte de Compra");
-                System.out.println("4. Salir");
+                System.out.println("2. Salir");
                 System.out.print("Seleccione una opción: ");
     
                 String opcion = br.readLine().trim();
