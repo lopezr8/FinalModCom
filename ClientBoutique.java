@@ -69,7 +69,65 @@ public class ClientBoutique {
 
     private static void menuCliente(BufferedReader br, InterfaceBoutique h) throws Exception{
         validarCedula(br,1,h);
+
+        try {
+            boolean salir = false;
+    
+            while (!salir) {
+                System.out.println("Menú Cliente:");
+                System.out.println("1. Comprar Ropa");
+                System.out.println("2. Listar Stock de la Boutique");
+                System.out.println("3. Reporte de Compra");
+                System.out.println("4. Salir");
+                System.out.print("Seleccione una opción: ");
+    
+                String opcion = br.readLine().trim();
+    
+                switch (opcion) {
+                    case "1":
+                        comprarRopa(br, h);
+                        break;
+                    case "2":
+                        listarStockBoutique(h);
+                        break;
+                    case "3":
+                        generarReporteCompra(br, h);
+                        break;
+                    case "4":
+                        salir = true;
+                        break;
+                    default:
+                        System.out.println("Opción no válida. Intente de nuevo.");
+                }
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
     }
+
+
+    //metodos para el menú clinete 
+
+    private static void comprarRopa(BufferedReader br, InterfaceBoutique h) throws Exception {
+        System.out.println("Stock actual de la boutique:");
+        for (Garment garment : garments) {
+            System.out.println(garment.getNombre() + " - Unidades disponibles: " + garment.getUnidades());
+        }
+    }
+    
+    private static void listarStockBoutique(InterfaceBoutique h) throws Exception {
+        
+    }
+    
+    private static void generarReporteCompra(BufferedReader br, InterfaceBoutique h) throws Exception {
+        
+    }
+
+    //fin de los metodos para el menú cliente 
+
+
+
     
     private static void validarCedula(BufferedReader br, int i, InterfaceBoutique h) throws Exception {
         String cedula = obtenerInputNoVacio(br, "Digite su cedula");
