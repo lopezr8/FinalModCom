@@ -18,46 +18,63 @@ public class ImplementacionBoutique extends UnicastRemoteObject implements Inter
         garments.add(garment);
     }
 
-    public void editGarment(int id){
-        
+    public void editGarment(int unidades, String nombre, int precio,int id) throws RemoteException {
+        Garment g = searchGarment(id);
+        g.setUnidades(unidades);
+        g.setNombre(nombre);
+        g.setPrecio(precio);
     }
 
-    public void deleteGarment(int id){
+    public Garment searchGarment(int id) throws RemoteException  {
+        for (int i = 0; i < garments.size(); i++) {
+            if(garments.get(i).getId()==id) return garments.get(i);
+        }
+        return null;
+    }
 
+    public int searchGarmentIndex(int id)   {
+        for (int i = 0; i < garments.size(); i++) {
+            if(garments.get(i).getId()==id) return i;
+        }
+        return -1;
+    }
+
+    public void deleteGarment(int id) throws RemoteException {
+        int index = searchGarmentIndex(id);
+        if(index != -1) this.garments.remove(index);
     }
 
 
 
     public String showGarments() throws RemoteException{
         String mensaje="";
+        if(garments.size()==0) return mensaje="No hay productos agregados";
         for (int i = 0; i < garments.size(); i++) {
-            mensaje += garments.get(i).getNombre();
+            mensaje +="id: "+garments.get(i).getId()  +" -- "+ "Nombre: "+ garments.get(i).getNombre()+ "--"+"Precio: "+garments.get(i).getPrecio()+"--"+"Unidades: "+garments.get(i).getUnidades() + "\n";
         }
         return mensaje;
     }
 
-    public boolean existeCliente(String c) {
+    public boolean existeCliente(String c) throws RemoteException {
 
         for (int i = 0; i < clientes.size(); i++) {
-            if(c == clientes.get(i).getCedula()){
+            if(c.equalsIgnoreCase(clientes.get(i).getCedula()) ){
                 return true;
             }
         }
         return false;
     }
-    public boolean existeMiembro(String c) {
+    public boolean existeMiembro(String c) throws RemoteException {
+        
         for (int i = 0; i < miembros.size(); i++) {
-            if(c == miembros.get(i).getCedula()){
+            if(c.equalsIgnoreCase(miembros.get(i).getCedula()) ){
                 return true;
             }
         }
         return false;
     }
 
-
-
-
-    public void addMember(String nombre, String cedula, int type) {
+    public void addMember(String nombre, String cedula, int type) throws RemoteException {
         Member c = new Member(nombre, cedula, type);
         if(type == 1){
             this.clientes.add(c);
