@@ -10,6 +10,7 @@ public interface InterfaceBoutique extends Remote {
     boolean existeCliente(String c) throws java.rmi.RemoteException;
     Garment searchGarment(int id)throws java.rmi.RemoteException;
     void editGarment(int unidades, String nombre, int precio,int id) throws java.rmi.RemoteException; 
-    void deleteGarment(int id)  throws java.rmi.RemoteException; 
+    void deleteGarment(int id)  throws java.rmi.RemoteException;
+    String buyGarments(int idn, int cantidad)throws java.rmi.RemoteException; 
     
 }

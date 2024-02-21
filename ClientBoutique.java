@@ -244,15 +244,10 @@ public class ClientBoutique {
     
                 switch (opcion) {
                     case "1":
-                        comprarRopa(br, h);
+                        comprarProducto(br, h);
                         break;
+
                     case "2":
-                        listarStockBoutique(h);
-                        break;
-                    case "3":
-                        generarReporteCompra(br, h);
-                        break;
-                    case "4":
                         salir = true;
                         break;
                     default:
@@ -268,48 +263,30 @@ public class ClientBoutique {
 
     //metodos para el menú clinete 
 
-     public void comprarRopa(String nombreCliente) throws RemoteException {
-        // Mostrar el stock de prendas disponibles
-        System.out.println("Stock actual de la boutique:");
-        for (Garment garment : garments) {
-            System.out.println("ID: " + garment.getId() + " - " + garment.getNombre() +
-                    " - Unidades disponibles: " + garment.getUnidades());
-        }
-
-        // Solicitar información al cliente
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Ingrese el ID de la prenda que desea comprar:");
-        int idPrenda = scanner.nextInt();
-
-        System.out.println("Ingrese la cantidad de unidades que desea comprar:");
-        int cantidadCompra = scanner.nextInt();
-
-        // Validar que la prenda exista y haya suficientes unidades disponibles
-        Garment prendaSeleccionada = null;
-        for (Garment garment : garments) {
-            if (garment.getId() == idPrenda && garment.getUnidades() >= cantidadCompra) {
-                prendaSeleccionada = garment;
-                break;
+    private static void comprarProducto(BufferedReader br, InterfaceBoutique h) throws Exception {
+        boolean b = true;
+        while(b){
+            System.out.println(h.showGarments());
+            System.out.println("-----------------------------");
+            String id = obtenerInputNoVacio(br, "Digite el ID del producto que desea comprar, o si desea salir, digite -1");
+            int idn = Integer.parseInt(id.trim());
+    
+            if(idn == -1 ){
+               b = false;
+               continue;
             }
+    
+            String unidades = obtenerInputNoVacio(br, "Digite el número de unidades que desea comprar");
+            int cantidad = Integer.parseInt(unidades.trim());
+    
+            String factura = h.buyGarments(idn, cantidad);
+            System.out.println(factura);
         }
+    }
 
-        if (prendaSeleccionada != null) {
-            // Realizar la compra y actualizar el stock
-            prendaSeleccionada.setUnidades(prendaSeleccionada.getUnidades() - cantidadCompra);
-            System.out.println("Compra realizada con éxito. Se han comprado " + cantidadCompra +
-                    " unidades de " + prendaSeleccionada.getNombre() + ".");
-        } else {
-            System.out.println("La prenda no existe o no hay suficientes unidades disponibles.");
-        }
-    }
-    
-    private static void listarStockBoutique(InterfaceBoutique h) throws Exception {
-        
-    }
-    
-    private static void generarReporteCompra(BufferedReader br, InterfaceBoutique h) throws Exception {
-        
-    }
+
+
+  
 
     //fin de los metodos para el menú cliente 
 

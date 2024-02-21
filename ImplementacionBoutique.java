@@ -55,6 +55,32 @@ public class ImplementacionBoutique extends UnicastRemoteObject implements Inter
         return mensaje;
     }
 
+
+
+    //metodo para comprar un producto y reducir el stock
+
+    public String buyGarments(int id, int cantidad) throws RemoteException {
+        Garment garment = searchGarment(id);
+    
+        if (garment != null && garment.getUnidades() >= cantidad) {
+            // Actualizar el stock
+            garment.setUnidades(garment.getUnidades() - cantidad);
+    
+            // Generar la factura
+            double total = garment.getPrecio() * cantidad;
+            String factura = "Producto comprado:\n";
+            factura += "ID: " + garment.getId() + "\n";
+            factura += "Nombre: " + garment.getNombre() + "\n";
+            factura += "Precio unitario: " + garment.getPrecio() + "\n";
+            factura += "Cantidad comprada: " + cantidad + "\n";
+            factura += "Total a pagar: " + total + "\n";
+    
+            return factura;
+        } else {
+            return "No se puede realizar la compra. Producto no encontrado o cantidad insuficiente.";
+        }
+    }
+
     public boolean existeCliente(String c) throws RemoteException {
 
         for (int i = 0; i < clientes.size(); i++) {
