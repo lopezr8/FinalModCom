@@ -1,6 +1,8 @@
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.rmi.Naming;
+import java.rmi.RemoteException;
+import java.util.Scanner;
 
 public class ClientBoutique {
     public static void main(String[] args) {
@@ -154,10 +156,38 @@ public class ClientBoutique {
 
     //metodos para el menú clinete 
 
-    private static void comprarRopa(BufferedReader br, InterfaceBoutique h) throws Exception {
+     public void comprarRopa(String nombreCliente) throws RemoteException {
+        // Mostrar el stock de prendas disponibles
         System.out.println("Stock actual de la boutique:");
         for (Garment garment : garments) {
-            System.out.println(garment.getNombre() + " - Unidades disponibles: " + garment.getUnidades());
+            System.out.println("ID: " + garment.getId() + " - " + garment.getNombre() +
+                    " - Unidades disponibles: " + garment.getUnidades());
+        }
+
+        // Solicitar información al cliente
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Ingrese el ID de la prenda que desea comprar:");
+        int idPrenda = scanner.nextInt();
+
+        System.out.println("Ingrese la cantidad de unidades que desea comprar:");
+        int cantidadCompra = scanner.nextInt();
+
+        // Validar que la prenda exista y haya suficientes unidades disponibles
+        Garment prendaSeleccionada = null;
+        for (Garment garment : garments) {
+            if (garment.getId() == idPrenda && garment.getUnidades() >= cantidadCompra) {
+                prendaSeleccionada = garment;
+                break;
+            }
+        }
+
+        if (prendaSeleccionada != null) {
+            // Realizar la compra y actualizar el stock
+            prendaSeleccionada.setUnidades(prendaSeleccionada.getUnidades() - cantidadCompra);
+            System.out.println("Compra realizada con éxito. Se han comprado " + cantidadCompra +
+                    " unidades de " + prendaSeleccionada.getNombre() + ".");
+        } else {
+            System.out.println("La prenda no existe o no hay suficientes unidades disponibles.");
         }
     }
     
