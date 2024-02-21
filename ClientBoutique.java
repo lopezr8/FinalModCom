@@ -21,7 +21,7 @@ public class ClientBoutique {
             iniciarSesion(br,h);
 
 
-            h.createGarment(10, "pantalon", 100000);
+            //h.createGarment(10, "pantalon", 100000);
 
 
             String mensaje = h.showGarments();
@@ -37,7 +37,7 @@ public class ClientBoutique {
             boolean salir = false;
             
             while (!salir) {
-                System.out.println("Bienvenido al cliente");
+                System.out.println("Bienvenido a FashionBoutique");
                 System.out.println("si es un cliente regular presione 1\n si es miembro de la empresa presione 2");
                 
                 String opcion = br.readLine().trim();
@@ -65,6 +65,51 @@ public class ClientBoutique {
 
     private static void menuMiembro(BufferedReader br, InterfaceBoutique h) throws Exception{
         validarCedula(br,2,h);    
+        try {
+            boolean salir = false;
+            
+            while (!salir) {
+                System.out.println("Bienvenido al menu de miembros de la empresa ");
+                System.out.println("---------------------------------------------");
+                System.out.println("1. Agregar producto ");
+                System.out.println("2. Editar producto ");
+                System.out.println("3. Eliminar producto ");
+                System.out.println("4. Salir ");
+                System.out.println("---------------------------------------------");
+                System.out.println("Digite una opción valida: ");
+    
+                String opcion = br.readLine().trim();
+
+                switch (opcion) {
+                    case "1":
+                        agregaProducto(br,h);
+                        
+                        break;
+                    case "2":
+                        menuMiembro(br,h);
+                        
+                        break;
+
+                    case "3":
+                        menuMiembro(br,h);
+                        
+                        break;
+                    case "4":
+                        salir = true;
+                        break;
+                    
+                    default:
+                        System.out.println("Opción no válida. Intente de nuevo.");
+                }
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+    }
+
+    private static void agregaProducto(BufferedReader br, InterfaceBoutique h) {
+        
     }
 
     private static void menuCliente(BufferedReader br, InterfaceBoutique h) throws Exception{
@@ -82,8 +127,6 @@ public class ClientBoutique {
         }else{
             if (!h.existeMiembro(cedula) ){
                 createMember(cedula, 2,h,br);
-            }else{
-                
             }
         }
 
