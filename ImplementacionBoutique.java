@@ -13,10 +13,16 @@ public class ImplementacionBoutique extends UnicastRemoteObject implements Inter
     } 
     
 
-    public void createGarment(int unidades, String nombre, int precio) throws RemoteException{
-        Garment garment = new Garment(unidades, nombre, precio);
+    public void createGarment(int unidades, String nombre, int precio,int id) throws RemoteException{
+        Garment garment = new Garment(unidades, nombre, precio,id);
         garments.add(garment);
     }
+
+    public void editGarment(){
+
+    }
+
+
 
     public String showGarments() throws RemoteException{
         String mensaje="";
@@ -24,15 +30,6 @@ public class ImplementacionBoutique extends UnicastRemoteObject implements Inter
             mensaje += garments.get(i).getNombre();
         }
         return mensaje;
-    }
-
-
-    public ArrayList<Garment> getGarments() {
-        return garments;
-    }
-
-    public void setGarments(ArrayList<Garment> garments) {
-        this.garments = garments;
     }
 
     public boolean existeCliente(String c) {
