@@ -17,11 +17,11 @@ public class ClientBoutique {
             String URLRegistro = "rmi://"+nombreNodo+":"+numPuertoRMI+"/helloworldRMI";
             InterfaceBoutique h = (InterfaceBoutique)Naming.lookup(URLRegistro); 
             System.out.println("Busqueda completa");
-            
-            String mensaje = h.decirHola("Edgar R.");
+            h.createGarment(10, "pantalon", 100000);
+
+
+            String mensaje = h.showGarments();
             System.out.println("Hola mundo Cliente "+mensaje);
-
-
 
         } catch (Exception e) {
             System.out.println("Excepcion en hola mundo cliente"+e);
