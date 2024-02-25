@@ -23,7 +23,7 @@ public class ServerBoutique {
             Naming.rebind(URLRegistro, objExportado);
             System.out.println("Servidor registrado. El registro contiene actualmente: ");
             listaRegistro(URLRegistro);
-            System.out.println("Servidor hola mundo preparado");
+            System.out.println("Servidor boutique preparado");
 
         } catch (Exception e) {
             System.out.println("Excepcion en hola mundo servidor.main: " +e);
